@@ -1,4 +1,4 @@
-namespace P1_GestionListaMusical
+namespace P1_GestionListaMusical.Modelos
 {
     internal static class Program
     {
