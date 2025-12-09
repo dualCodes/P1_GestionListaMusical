@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace P1_GestionListaMusical.Modelos
 {
-    internal class Horario
+    public class Horario
     {
         public int EventoID { get; set; }
         public int ListaID { get; set; }

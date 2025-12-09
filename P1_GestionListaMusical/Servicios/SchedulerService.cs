@@ -12,26 +12,41 @@ namespace P1_GestionListaMusical.Servicios
 {
     public class SchedulerService
     {
-        private readonly System.Timers.Timer _timer;
+        private System.Timers.Timer _timer;
         private readonly AudioPlayerService _playerService = new AudioPlayerService();
         private int _lastExecutedEventId = -1;
-
-        public SchedulerService()
-        {
-            _timer = new System.Timers.Timer(1000);
-            _timer.Elapsed += VerificarHorarios;
-            _timer.AutoReset = true;
-        }
+        private bool _isStopping = false;
 
         public void Iniciar()
         {
+            _isStopping = false;
+
+            if (_timer == null)
+            {
+                _timer = new System.Timers.Timer(1000);
+                _timer.Elapsed += VerificarHorarios;
+                _timer.AutoReset = true;
+            }
+
             _timer.Start();
         }
 
         public void Detener()
         {
-            _timer.Stop();
-            _timer.Dispose();
+            _isStopping = true;
+
+            if (_timer != null)
+            {
+                _timer.Stop();
+                _timer.Dispose();
+                _timer = null;
+            }
+
+            try
+            {
+                _playerService.DetenerReproduccion();
+            }
+            catch { }
         }
 
         private List<Horario> ObtenerHorariosActivos()
@@ -71,28 +86,38 @@ namespace P1_GestionListaMusical.Servicios
 
         private void VerificarHorarios(object sender, System.Timers.ElapsedEventArgs e)
         {
-            var now = DateTime.Now;
+            if (_isStopping || _timer == null) return;
 
-            if (now.Second != 0) return;
-
-            _lastExecutedEventId = -1;
-
-            var horariosActivos = ObtenerHorariosActivos();
-
-            foreach (var horario in horariosActivos)
+            try
             {
-                if (now.Hour == horario.InicioRegla.Hour &&
-                    now.Minute == horario.InicioRegla.Minute)
+                var now = DateTime.Now;
+
+                if (now.Second != 0) return;
+
+                _lastExecutedEventId = -1;
+
+                var horariosActivos = ObtenerHorariosActivos();
+
+                foreach (var horario in horariosActivos)
                 {
-                    if (EsMomentoDeEjecutar(horario, now))
+                    if (_isStopping) break;
+
+                    if (now.Hour == horario.InicioRegla.Hour &&
+                        now.Minute == horario.InicioRegla.Minute)
                     {
-                        if (_lastExecutedEventId != horario.EventoID)
+                        if (EsMomentoDeEjecutar(horario, now))
                         {
-                            _playerService.ReproducirLista(horario.ListaID);
-                            _lastExecutedEventId = horario.EventoID;
+                            if (_lastExecutedEventId != horario.EventoID)
+                            {
+                                _playerService.ReproducirLista(horario.ListaID);
+                                _lastExecutedEventId = horario.EventoID;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception)
+            {
             }
         }
 

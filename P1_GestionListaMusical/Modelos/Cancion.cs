@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace P1_GestionListaMusical.Modelos
 {
-    internal class Cancion
+    public class Cancion
     {
         public int CancionID { get; set; }
         public string Titulo { get; set; }

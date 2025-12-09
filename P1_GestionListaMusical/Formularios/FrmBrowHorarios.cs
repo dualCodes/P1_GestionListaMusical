@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using P1_GestionListaMusical.Datos;
 using P1_GestionListaMusical.Modelos;
-using System.Collections.Generic;
 
 namespace P1_GestionListaMusical.Formularios
 {
@@ -24,11 +23,51 @@ namespace P1_GestionListaMusical.Formularios
         {
             try
             {
-                dgvDatos.DataSource = _repository.ObtenerHorariosActivos();
+                dgvDatos.DataSource = null;
+                dgvDatos.DataSource = _repository.ObtenerTodos();
+                PersonalizarGrid();
             }
             catch
             {
                 MessageBox.Show("Error al cargar datos.");
+            }
+        }
+
+        private void PersonalizarGrid()
+        {
+            dgvDatos.Columns["EventoID"].Visible = false;
+            dgvDatos.Columns["ListaID"].Visible = false;
+            dgvDatos.Columns["Excepciones"].Visible = false;
+            dgvDatos.Columns["ReglaRRule"].Visible = false;
+
+            dgvDatos.Columns["Nombre"].HeaderText = "Nombre del Evento";
+            dgvDatos.Columns["EstaActivo"].HeaderText = "Activo";
+            dgvDatos.Columns["InicioRegla"].HeaderText = "Hora Inicio";
+
+            dgvDatos.ReadOnly = true;
+            dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDatos.MultiSelect = false;
+            dgvDatos.AllowUserToResizeRows = false;
+        }
+
+        private void dgvDatos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                EditarRegistroActual();
+            }
+        }
+
+        private void EditarRegistroActual()
+        {
+            if (dgvDatos.CurrentRow != null)
+            {
+                Horario item = (Horario)dgvDatos.CurrentRow.DataBoundItem;
+                FrmHorario frm = new FrmHorario(item.EventoID);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    CargarDatos();
+                }
             }
         }
 
@@ -43,15 +82,7 @@ namespace P1_GestionListaMusical.Formularios
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (dgvDatos.CurrentRow != null)
-            {
-                Horario item = (Horario)dgvDatos.CurrentRow.DataBoundItem;
-                FrmHorario frm = new FrmHorario(item.EventoID);
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    CargarDatos();
-                }
-            }
+            EditarRegistroActual();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

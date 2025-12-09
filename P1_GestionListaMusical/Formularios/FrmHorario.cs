@@ -7,58 +7,81 @@ namespace P1_GestionListaMusical.Formularios
 {
     public partial class FrmHorario : Form
     {
-        private readonly HorarioRepository _repoHorario = new HorarioRepository();
-        private readonly ListaRepository _repoLista = new ListaRepository();
+        private readonly HorarioRepository _horarioRepo = new HorarioRepository();
+        private readonly ListaRepository _listaRepo = new ListaRepository();
         private Horario _horario;
 
         public FrmHorario(int? id)
         {
             InitializeComponent();
-            CargarListas();
             if (id.HasValue)
             {
-                _horario = _repoHorario.ObtenerPorId(id.Value);
-                CargarDatos();
+                _horario = _horarioRepo.ObtenerPorId(id.Value);
+                this.Text = "Editar Evento";
             }
             else
             {
-                _horario = new Horario();
+                _horario = new Horario
+                {
+                    EstaActivo = true,
+                    InicioRegla = DateTime.Now
+                };
             }
         }
 
-        private void CargarListas()
+        private void FrmHorario_Load(object sender, EventArgs e)
         {
-            cmbLista.DataSource = _repoLista.ObtenerTodas();
-            cmbLista.DisplayMember = "Nombre";
-            cmbLista.ValueMember = "ListaID";
+            CargarComboListas();
+            CargarDatos();
+        }
+
+        private void CargarComboListas()
+        {
+            var listas = _listaRepo.ObtenerTodas();
+            cboListas.DataSource = listas;
+            cboListas.DisplayMember = "Nombre";
+            cboListas.ValueMember = "ListaID";
         }
 
         private void CargarDatos()
         {
             txtNombre.Text = _horario.Nombre;
-            chkActivo.Checked = _horario.EstaActivo;
-            dtpInicio.Value = _horario.InicioRegla;
-            cmbLista.SelectedValue = _horario.ListaID;
+            dtpHora.Value = _horario.InicioRegla;
+
+            if (_horario.ListaID > 0)
+                cboListas.SelectedValue = _horario.ListaID;
+
+            chkRepetir.Checked = !string.IsNullOrEmpty(_horario.ReglaRRule);
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtNombre.Text))
+            if (string.IsNullOrEmpty(txtNombre.Text) || cboListas.SelectedValue == null)
             {
-                MessageBox.Show("Nombre requerido");
+                MessageBox.Show("Faltan datos obligatorios.");
                 return;
             }
 
             _horario.Nombre = txtNombre.Text;
-            _horario.EstaActivo = chkActivo.Checked;
-            _horario.InicioRegla = dtpInicio.Value;
-            _horario.ListaID = (int)cmbLista.SelectedValue;
-            _horario.ReglaRRule = "FREQ=DAILY";
+            _horario.ListaID = (int)cboListas.SelectedValue;
+
+            DateTime fechaHoy = DateTime.Today;
+            _horario.InicioRegla = new DateTime(fechaHoy.Year, fechaHoy.Month, fechaHoy.Day,
+                                                dtpHora.Value.Hour, dtpHora.Value.Minute, 0);
+
+            if (chkRepetir.Checked)
+            {
+                _horario.ReglaRRule = "FREQ=DAILY";
+            }
+            else
+            {
+                _horario.ReglaRRule = "";
+            }
 
             if (_horario.EventoID == 0)
-                _repoHorario.Insertar(_horario);
+                _horarioRepo.Insertar(_horario);
             else
-                _repoHorario.Actualizar(_horario);
+                _horarioRepo.Actualizar(_horario);
 
             DialogResult = DialogResult.OK;
         }

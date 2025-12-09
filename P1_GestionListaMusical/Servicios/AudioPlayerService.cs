@@ -2,54 +2,102 @@
 using P1_GestionListaMusical.Datos;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace P1_GestionListaMusical.Servicios
 {
-    internal class AudioPlayerService
+    public class AudioPlayerService : IDisposable
     {
-        private readonly HorarioRepository _repository = new HorarioRepository();
-        private AudioFileReader _audioFile;
-        private WaveOutEvent _outputDevice;
-
-        public bool IsPlaying => _outputDevice?.PlaybackState == PlaybackState.Playing;
+        private IWavePlayer _waveOut;
+        private AudioFileReader _audioFileReader;
+        private readonly HorarioRepository _repo = new HorarioRepository();
+        private Queue<string> _playQueue = new Queue<string>();
+        public bool IsPlaying { get; private set; }
 
         public void ReproducirLista(int listaId)
         {
-            var rutasAudio = _repository.ObtenerRutasAudioPorLista(listaId);
+            DetenerReproduccion();
 
-            if (rutasAudio.Any() && File.Exists(rutasAudio.First()))
+            var rutas = _repo.ObtenerRutasAudioPorLista(listaId);
+            if (rutas == null || rutas.Count == 0) return;
+
+            _playQueue = new Queue<string>(rutas);
+
+            ReproducirSiguiente();
+        }
+
+        private void ReproducirSiguiente()
+        {
+            if (_playQueue.Count == 0)
             {
-                DetenerReproduccion();
+                IsPlaying = false;
+                return;
+            }
 
-                string ruta = rutasAudio.First();
+            string ruta = _playQueue.Dequeue();
 
-                _outputDevice = new WaveOutEvent();
-                _audioFile = new AudioFileReader(ruta);
+            if (!File.Exists(ruta))
+            {
+                ReproducirSiguiente();
+                return;
+            }
 
-                _outputDevice.Init(_audioFile);
-                _outputDevice.Play();
+            try
+            {
+                if (_waveOut != null)
+                {
+                    _waveOut.Stop();
+                    _waveOut.Dispose();
+                    _waveOut = null;
+                }
 
-                _outputDevice.PlaybackStopped += (sender, e) => DetenerReproduccion();
+                if (_audioFileReader != null)
+                {
+                    _audioFileReader.Dispose();
+                    _audioFileReader = null;
+                }
 
+                _waveOut = new WaveOutEvent();
+                _audioFileReader = new AudioFileReader(ruta);
+
+                _waveOut.Init(_audioFileReader);
+
+                _waveOut.PlaybackStopped += (s, e) =>
+                {
+                    ReproducirSiguiente();
+                };
+
+                _waveOut.Play();
+                IsPlaying = true;
+            }
+            catch
+            {
+                IsPlaying = false;
             }
         }
 
         public void DetenerReproduccion()
         {
-            if (_outputDevice != null)
+            IsPlaying = false;
+            _playQueue.Clear();
+
+            if (_waveOut != null)
             {
-                _outputDevice.Stop();
-                _outputDevice.Dispose();
-                _outputDevice = null;
+                _waveOut.Stop();
+                _waveOut.Dispose();
+                _waveOut = null;
             }
-            if (_audioFile != null)
+            if (_audioFileReader != null)
             {
-                _audioFile.Dispose();
-                _audioFile = null;
+                _audioFileReader.Dispose();
+                _audioFileReader = null;
             }
+        }
+
+        public void Dispose()
+        {
+            DetenerReproduccion();
         }
     }
 }

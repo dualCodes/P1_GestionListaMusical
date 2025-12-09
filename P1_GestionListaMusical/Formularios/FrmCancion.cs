@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using P1_GestionListaMusical.Datos;
 using P1_GestionListaMusical.Modelos;
+using System.IO;
 
 namespace P1_GestionListaMusical.Formularios
 {
@@ -13,22 +14,41 @@ namespace P1_GestionListaMusical.Formularios
         public FrmCancion(int? id)
         {
             InitializeComponent();
+
             if (id.HasValue)
             {
                 _cancion = _repository.ObtenerPorId(id.Value);
-                CargarDatos();
+                this.Text = "Modificar Canción";
             }
             else
             {
                 _cancion = new Cancion();
+                this.Text = "Importar Audio";
             }
+            CargarDatosFormulario();
         }
 
-        private void CargarDatos()
+        private void CargarDatosFormulario()
         {
             txtTitulo.Text = _cancion.Titulo;
             txtArtista.Text = _cancion.Artista;
             txtRuta.Text = _cancion.RutaArchivo;
+        }
+
+        private void btnExaminar_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Archivos de Audio|*.mp3;*.wav;*.wma";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    txtRuta.Text = ofd.FileName;
+                    if (string.IsNullOrEmpty(txtTitulo.Text))
+                    {
+                        txtTitulo.Text = Path.GetFileNameWithoutExtension(ofd.FileName);
+                    }
+                }
+            }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -42,6 +62,7 @@ namespace P1_GestionListaMusical.Formularios
             _cancion.Titulo = txtTitulo.Text;
             _cancion.Artista = txtArtista.Text;
             _cancion.RutaArchivo = txtRuta.Text;
+            _cancion.DuracionSegundos = 0;
 
             if (_cancion.CancionID == 0)
                 _repository.Insertar(_cancion);

@@ -23,11 +23,55 @@ namespace P1_GestionListaMusical.Formularios
         {
             try
             {
+                dgvDatos.DataSource = null;
                 dgvDatos.DataSource = _repository.ObtenerTodas();
+                PersonalizarGrid();
             }
             catch
             {
                 MessageBox.Show("Error al cargar datos.");
+            }
+        }
+
+        private void PersonalizarGrid()
+        {
+            if (dgvDatos.Columns.Contains("ListaID"))
+                dgvDatos.Columns["ListaID"].Visible = false;
+
+            if (dgvDatos.Columns.Contains("Nombre"))
+                dgvDatos.Columns["Nombre"].HeaderText = "Nombre de Lista";
+
+            if (dgvDatos.Columns.Contains("Descripcion"))
+                dgvDatos.Columns["Descripcion"].HeaderText = "Descripción";
+
+            if (dgvDatos.Columns.Contains("ModoReproduccion"))
+                dgvDatos.Columns["ModoReproduccion"].HeaderText = "Modo de Reproducción";
+
+            dgvDatos.ReadOnly = true;
+            dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDatos.MultiSelect = false;
+            dgvDatos.AllowUserToResizeRows = false;
+            dgvDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void dgvDatos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                EditarRegistroActual();
+            }
+        }
+
+        private void EditarRegistroActual()
+        {
+            if (dgvDatos.CurrentRow != null)
+            {
+                Lista item = (Lista)dgvDatos.CurrentRow.DataBoundItem;
+                FrmLista frm = new FrmLista(item.ListaID);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    CargarDatos();
+                }
             }
         }
 
@@ -42,22 +86,14 @@ namespace P1_GestionListaMusical.Formularios
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (dgvDatos.CurrentRow != null)
-            {
-                Lista item = (Lista)dgvDatos.CurrentRow.DataBoundItem;
-                FrmLista frm = new FrmLista(item.ListaID);
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    CargarDatos();
-                }
-            }
+            EditarRegistroActual();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (dgvDatos.CurrentRow != null)
             {
-                if (MessageBox.Show("¿Eliminar registro?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("¿Eliminar lista?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     Lista item = (Lista)dgvDatos.CurrentRow.DataBoundItem;
                     _repository.Eliminar(item.ListaID);

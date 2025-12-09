@@ -1,15 +1,48 @@
 ﻿using MySql.Data.MySqlClient;
-using P1_GestionListaMusical.Modelos;
-using System;
 using System.Collections.Generic;
+using P1_GestionListaMusical.Modelos;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace P1_GestionListaMusical.Datos
 {
-    internal class HorarioRepository
+    public class HorarioRepository
     {
+        public List<Horario> ObtenerTodos()
+        {
+            var horarios = new List<Horario>();
+            string query = "SELECT EventoID, ListaID, Nombre, ReglaRRule, InicioRegla, Excepciones, EstaActivo FROM Horarios";
+
+            try
+            {
+                using (var conn = new MySqlConnection(DbConfig.ConnectionString))
+                {
+                    conn.Open();
+                    using (var cmd = new MySqlCommand(query, conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            horarios.Add(new Horario
+                            {
+                                EventoID = reader.GetInt32("EventoID"),
+                                ListaID = reader.GetInt32("ListaID"),
+                                Nombre = reader.GetString("Nombre"),
+                                ReglaRRule = reader.IsDBNull(reader.GetOrdinal("ReglaRRule")) ? null : reader.GetString("ReglaRRule"),
+                                InicioRegla = reader.GetDateTime("InicioRegla"),
+                                Excepciones = reader.IsDBNull(reader.GetOrdinal("Excepciones")) ? null : reader.GetString("Excepciones"),
+                                EstaActivo = reader.GetBoolean("EstaActivo")
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return horarios;
+        }
+
         public List<Horario> ObtenerHorariosActivos()
         {
             var horarios = new List<Horario>();
@@ -39,7 +72,7 @@ namespace P1_GestionListaMusical.Datos
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
             return horarios;
@@ -105,7 +138,7 @@ namespace P1_GestionListaMusical.Datos
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
             return rutas;
