@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MySql.Data.MySqlClient;
 using P1_GestionListaMusical.Datos;
 using P1_GestionListaMusical.Modelos;
+using Ical.Net;
+using Ical.Net.CalendarComponents;
+using Ical.Net.DataTypes;
 
 namespace P1_GestionListaMusical.Servicios
 {
@@ -21,7 +23,6 @@ namespace P1_GestionListaMusical.Servicios
 
             if (_timer == null)
             {
-                // Verificamos cada segundo para mayor precisión
                 _timer = new System.Timers.Timer(1000);
                 _timer.Elapsed += VerificarHorarios;
                 _timer.AutoReset = true;
@@ -54,12 +55,10 @@ namespace P1_GestionListaMusical.Servicios
 
             var now = DateTime.Now;
 
-            // Evitamos ejecución múltiple en el mismo segundo/minuto para el mismo evento
             if (now.Second != 0) return;
 
             try
             {
-                // Reiniciar el ID ejecutado si cambiamos de minuto para permitir otros eventos
                 if (_lastExecutionTime.Minute != now.Minute)
                 {
                     _lastExecutedEventId = -1;
@@ -78,47 +77,65 @@ namespace P1_GestionListaMusical.Servicios
                         _playerService.ReproducirLista(horario.ListaID);
                         _lastExecutedEventId = horario.EventoID;
                         _lastExecutionTime = now;
-
-                        // Solo permitimos disparar un evento por segundo exacto para evitar conflictos de audio
                         break;
                     }
                 }
             }
-            catch (Exception)
-            {
-                // Loguear error si existe mecanismo, si no, silenciar para no detener el servicio
-            }
+            catch { }
         }
 
         private bool EsMomentoDeEjecutar(Horario horario, DateTime fechaActual)
         {
-            // Normalizamos segundos para comparar
-            var inicio = horario.InicioRegla;
+            var inicioLocal = DateTime.SpecifyKind(horario.InicioRegla, DateTimeKind.Local);
 
-            // CASO 1: Evento Único (Sin Regla)
-            // Debe coincidir Fecha exacta, Hora y Minuto
             if (string.IsNullOrWhiteSpace(horario.ReglaRRule))
             {
-                return inicio.Year == fechaActual.Year &&
-                       inicio.Month == fechaActual.Month &&
-                       inicio.Day == fechaActual.Day &&
-                       inicio.Hour == fechaActual.Hour &&
-                       inicio.Minute == fechaActual.Minute;
+                return inicioLocal.Date == fechaActual.Date &&
+                       inicioLocal.Hour == fechaActual.Hour &&
+                       inicioLocal.Minute == fechaActual.Minute;
             }
 
-            // CASO 2: Repetir Diario (FREQ=DAILY)
-            // Ignoramos la fecha, solo importa que coincida Hora y Minuto
-            if (horario.ReglaRRule.ToUpper().Contains("FREQ=DAILY"))
+            try
             {
-                return inicio.Hour == fechaActual.Hour &&
-                       inicio.Minute == fechaActual.Minute;
-            }
+                var vEvent = new CalendarEvent
+                {
+                    Start = new CalDateTime(inicioLocal)
+                };
 
-            // CASO 3: Otros casos complejos (Semanal, Mensual) - Implementación básica
-            // Si necesitas soporte real para reglas complejas (ej. "Solo Lunes"), 
-            // aquí es donde intentaríamos usar Ical.Net, pero por ahora devolvemos false 
-            // para asegurar estabilidad en lo básico.
-            return false;
+                var pattern = new RecurrencePattern(horario.ReglaRRule);
+                vEvent.RecurrenceRules.Add(pattern);
+
+                var searchStart = new CalDateTime(fechaActual.Date);
+                var occurrences = vEvent.GetOccurrences(searchStart);
+
+                foreach (var occurrence in occurrences)
+                {
+                    var occTime = occurrence.Period.StartTime.Value;
+
+                    if (occTime.Kind == DateTimeKind.Utc)
+                    {
+                        occTime = occTime.ToLocalTime();
+                    }
+
+                    if (occTime.Date == fechaActual.Date &&
+                        occTime.Hour == fechaActual.Hour &&
+                        occTime.Minute == fechaActual.Minute)
+                    {
+                        return true;
+                    }
+
+                    if (occTime > fechaActual)
+                    {
+                        break;
+                    }
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
