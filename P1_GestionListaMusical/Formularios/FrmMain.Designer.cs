@@ -15,346 +15,408 @@
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.pnTop = new System.Windows.Forms.Panel();
-            this.lblTituloApp = new System.Windows.Forms.Label();
-            this.pnSide = new System.Windows.Forms.Panel();
-            this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.btnNavHorarios = new System.Windows.Forms.ToolStripButton();
-            this.btnNavCanciones = new System.Windows.Forms.ToolStripButton();
-            this.btnNavListas = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnIniciar = new System.Windows.Forms.ToolStripButton();
-            this.btnDetener = new System.Windows.Forms.ToolStripButton();
-            this.pnConsole = new System.Windows.Forms.Panel();
-            this.pnControlesAudio = new System.Windows.Forms.Panel();
-            this.btnSaltar = new System.Windows.Forms.Button();
-            this.btnEmergencyStop = new System.Windows.Forms.Button();
-            this.pbProgreso = new System.Windows.Forms.ProgressBar();
-            this.lblSonando = new System.Windows.Forms.Label();
-            this.pnInfoEvento = new System.Windows.Forms.Panel();
-            this.lblProximoEvento = new System.Windows.Forms.Label();
-            this.lblTituloProximo = new System.Windows.Forms.Label();
-            this.uiTimer = new System.Windows.Forms.Timer(this.components);
-            this.pnSide.SuspendLayout();
-            this.tsMenu.SuspendLayout();
-            this.pnConsole.SuspendLayout();
-            this.pnControlesAudio.SuspendLayout();
-            this.pnInfoEvento.SuspendLayout();
-            this.pnTop.SuspendLayout();
-            this.SuspendLayout();
-
-            // 
-            // pnTop
-            // 
-            this.pnTop.BackColor = System.Drawing.Color.White;
-            this.pnTop.Controls.Add(this.lblTituloApp);
-            this.pnTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnTop.Location = new System.Drawing.Point(220, 0);
-            this.pnTop.Name = "pnTop";
-            this.pnTop.Size = new System.Drawing.Size(730, 40);
-            this.pnTop.TabIndex = 1;
-
-            // 
-            // lblTituloApp
-            // 
-            this.lblTituloApp.AutoSize = true;
-            this.lblTituloApp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTituloApp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblTituloApp.Location = new System.Drawing.Point(15, 9);
-            this.lblTituloApp.Name = "lblTituloApp";
-            this.lblTituloApp.Size = new System.Drawing.Size(263, 21);
-            this.lblTituloApp.Text = "SISTEMA DE GESTIÓN DE TIMBRES";
-
+            components = new System.ComponentModel.Container();
+            pnSide = new Panel();
+            btnDetener = new Button();
+            btnIniciar = new Button();
+            labelSeparador = new Label();
+            btnNavListas = new Button();
+            btnNavCanciones = new Button();
+            btnNavHorarios = new Button();
+            pnLogo = new Panel();
+            lblLogo = new Label();
+            pnTop = new Panel();
+            lblTituloApp = new Label();
+            pnConsole = new Panel();
+            pnControlesAudio = new Panel();
+            btnRecargar = new Button();
+            btnEmergencyStop = new Button();
+            pbProgreso = new ProgressBar();
+            lblSonando = new Label();
+            pnInfoEvento = new Panel();
+            lblProximoEvento = new Label();
+            lblTituloProximo = new Label();
+            pnStatus = new Panel();
+            statusStrip1 = new StatusStrip();
+            lblEstadoServicio = new ToolStripStatusLabel();
+            lblEspacio = new ToolStripStatusLabel();
+            lblReloj = new ToolStripStatusLabel();
+            uiTimer = new System.Windows.Forms.Timer(components);
+            pnSide.SuspendLayout();
+            pnLogo.SuspendLayout();
+            pnTop.SuspendLayout();
+            pnConsole.SuspendLayout();
+            pnControlesAudio.SuspendLayout();
+            pnInfoEvento.SuspendLayout();
+            pnStatus.SuspendLayout();
+            statusStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // pnSide
             // 
-            this.pnSide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
-            this.pnSide.Controls.Add(this.tsMenu);
-            this.pnSide.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnSide.Location = new System.Drawing.Point(0, 0);
-            this.pnSide.Name = "pnSide";
-            this.pnSide.Padding = new System.Windows.Forms.Padding(0);
-            this.pnSide.Size = new System.Drawing.Size(220, 530);
-            this.pnSide.TabIndex = 0;
-
-            // 
-            // tsMenu
-            // 
-            this.tsMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
-            this.tsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tsMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNavHorarios,
-            this.btnNavCanciones,
-            this.btnNavListas,
-            this.toolStripSeparator1,
-            this.btnIniciar,
-            this.btnDetener});
-            this.tsMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.tsMenu.Location = new System.Drawing.Point(0, 0);
-            this.tsMenu.Name = "tsMenu";
-            this.tsMenu.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.tsMenu.Size = new System.Drawing.Size(220, 530);
-            this.tsMenu.TabIndex = 0;
-
-            // 
-            // btnNavHorarios
-            // 
-            this.btnNavHorarios.AutoSize = false;
-            this.btnNavHorarios.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.ImageAndText;
-            this.btnNavHorarios.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnNavHorarios.ForeColor = System.Drawing.Color.White;
-            this.btnNavHorarios.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNavHorarios.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.btnNavHorarios.Name = "btnNavHorarios";
-            this.btnNavHorarios.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnNavHorarios.Size = new System.Drawing.Size(218, 50);
-            this.btnNavHorarios.Text = "  Programación";
-            this.btnNavHorarios.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNavHorarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNavHorarios.Click += new System.EventHandler(this.btnNavHorarios_Click);
-
-            // 
-            // btnNavCanciones
-            // 
-            this.btnNavCanciones.AutoSize = false;
-            this.btnNavCanciones.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.ImageAndText;
-            this.btnNavCanciones.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnNavCanciones.ForeColor = System.Drawing.Color.White;
-            this.btnNavCanciones.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNavCanciones.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.btnNavCanciones.Name = "btnNavCanciones";
-            this.btnNavCanciones.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnNavCanciones.Size = new System.Drawing.Size(218, 50);
-            this.btnNavCanciones.Text = "  Audios";
-            this.btnNavCanciones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNavCanciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNavCanciones.Click += new System.EventHandler(this.btnNavCanciones_Click);
-
-            // 
-            // btnNavListas
-            // 
-            this.btnNavListas.AutoSize = false;
-            this.btnNavListas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.ImageAndText;
-            this.btnNavListas.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnNavListas.ForeColor = System.Drawing.Color.White;
-            this.btnNavListas.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNavListas.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.btnNavListas.Name = "btnNavListas";
-            this.btnNavListas.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnNavListas.Size = new System.Drawing.Size(218, 50);
-            this.btnNavListas.Text = "  Listas";
-            this.btnNavListas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNavListas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNavListas.Click += new System.EventHandler(this.btnNavListas_Click);
-
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(55)))), ((int)(((byte)(70)))));
-            this.toolStripSeparator1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(55)))), ((int)(((byte)(70)))));
-            this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(10);
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
-
-            // 
-            // btnIniciar
-            // 
-            this.btnIniciar.AutoSize = false;
-            this.btnIniciar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.ImageAndText;
-            this.btnIniciar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnIniciar.ForeColor = System.Drawing.Color.LightGreen;
-            this.btnIniciar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnIniciar.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.btnIniciar.Name = "btnIniciar";
-            this.btnIniciar.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnIniciar.Size = new System.Drawing.Size(218, 50);
-            this.btnIniciar.Text = "  ARMAR SISTEMA";
-            this.btnIniciar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIniciar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
-
+            pnSide.BackColor = Color.FromArgb(33, 37, 41);
+            pnSide.Controls.Add(btnDetener);
+            pnSide.Controls.Add(btnIniciar);
+            pnSide.Controls.Add(labelSeparador);
+            pnSide.Controls.Add(btnNavListas);
+            pnSide.Controls.Add(btnNavCanciones);
+            pnSide.Controls.Add(btnNavHorarios);
+            pnSide.Controls.Add(pnLogo);
+            pnSide.Dock = DockStyle.Left;
+            pnSide.Location = new Point(0, 0);
+            pnSide.Name = "pnSide";
+            pnSide.Size = new Size(220, 661);
+            pnSide.TabIndex = 0;
             // 
             // btnDetener
             // 
-            this.btnDetener.AutoSize = false;
-            this.btnDetener.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.ImageAndText;
-            this.btnDetener.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnDetener.ForeColor = System.Drawing.Color.Salmon;
-            this.btnDetener.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDetener.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.btnDetener.Name = "btnDetener";
-            this.btnDetener.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnDetener.Size = new System.Drawing.Size(218, 50);
-            this.btnDetener.Text = "  DESARMAR";
-            this.btnDetener.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDetener.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDetener.Click += new System.EventHandler(this.btnDetener_Click);
-
+            btnDetener.BackColor = Color.FromArgb(220, 53, 69);
+            btnDetener.Dock = DockStyle.Bottom;
+            btnDetener.FlatAppearance.BorderSize = 0;
+            btnDetener.FlatStyle = FlatStyle.Flat;
+            btnDetener.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnDetener.ForeColor = Color.White;
+            btnDetener.Location = new Point(0, 561);
+            btnDetener.Name = "btnDetener";
+            btnDetener.Size = new Size(220, 50);
+            btnDetener.TabIndex = 6;
+            btnDetener.Text = "APAGAR";
+            btnDetener.UseVisualStyleBackColor = false;
+            btnDetener.Click += btnDetener_Click;
             // 
-            // pnConsole (Panel Inferior Grande)
+            // btnIniciar
             // 
-            this.pnConsole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.pnConsole.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnConsole.Controls.Add(this.pnControlesAudio);
-            this.pnConsole.Controls.Add(this.pnInfoEvento);
-            this.pnConsole.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnConsole.Location = new System.Drawing.Point(220, 440);
-            this.pnConsole.Name = "pnConsole";
-            this.pnConsole.Size = new System.Drawing.Size(730, 90);
-            this.pnConsole.TabIndex = 2;
-
+            btnIniciar.BackColor = Color.FromArgb(25, 135, 84);
+            btnIniciar.Dock = DockStyle.Bottom;
+            btnIniciar.FlatAppearance.BorderSize = 0;
+            btnIniciar.FlatStyle = FlatStyle.Flat;
+            btnIniciar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnIniciar.ForeColor = Color.White;
+            btnIniciar.Location = new Point(0, 611);
+            btnIniciar.Name = "btnIniciar";
+            btnIniciar.Size = new Size(220, 50);
+            btnIniciar.TabIndex = 5;
+            btnIniciar.Text = "ENCENDER";
+            btnIniciar.UseVisualStyleBackColor = false;
+            btnIniciar.Click += btnIniciar_Click;
             // 
-            // pnInfoEvento
+            // labelSeparador
             // 
-            this.pnInfoEvento.Controls.Add(this.lblProximoEvento);
-            this.pnInfoEvento.Controls.Add(this.lblTituloProximo);
-            this.pnInfoEvento.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnInfoEvento.Location = new System.Drawing.Point(0, 0);
-            this.pnInfoEvento.Name = "pnInfoEvento";
-            this.pnInfoEvento.Size = new System.Drawing.Size(300, 88);
-            this.pnInfoEvento.TabIndex = 0;
-
+            labelSeparador.BorderStyle = BorderStyle.Fixed3D;
+            labelSeparador.Dock = DockStyle.Top;
+            labelSeparador.Location = new Point(0, 230);
+            labelSeparador.Name = "labelSeparador";
+            labelSeparador.Size = new Size(220, 2);
+            labelSeparador.TabIndex = 4;
             // 
-            // lblTituloProximo
+            // btnNavListas
             // 
-            this.lblTituloProximo.AutoSize = true;
-            this.lblTituloProximo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular);
-            this.lblTituloProximo.ForeColor = System.Drawing.Color.DimGray;
-            this.lblTituloProximo.Location = new System.Drawing.Point(15, 20);
-            this.lblTituloProximo.Name = "lblTituloProximo";
-            this.lblTituloProximo.Size = new System.Drawing.Size(109, 15);
-            this.lblTituloProximo.Text = "PRÓXIMO EVENTO:";
-
+            btnNavListas.Dock = DockStyle.Top;
+            btnNavListas.FlatAppearance.BorderSize = 0;
+            btnNavListas.FlatAppearance.MouseOverBackColor = Color.FromArgb(73, 80, 87);
+            btnNavListas.FlatStyle = FlatStyle.Flat;
+            btnNavListas.Font = new Font("Segoe UI", 11F);
+            btnNavListas.ForeColor = Color.White;
+            btnNavListas.Location = new Point(0, 180);
+            btnNavListas.Name = "btnNavListas";
+            btnNavListas.Padding = new Padding(15, 0, 0, 0);
+            btnNavListas.Size = new Size(220, 50);
+            btnNavListas.TabIndex = 3;
+            btnNavListas.Text = "📂  Listas";
+            btnNavListas.TextAlign = ContentAlignment.MiddleLeft;
+            btnNavListas.UseVisualStyleBackColor = true;
+            btnNavListas.Click += btnNavListas_Click;
             // 
-            // lblProximoEvento
+            // btnNavCanciones
             // 
-            this.lblProximoEvento.AutoSize = true;
-            this.lblProximoEvento.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblProximoEvento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
-            this.lblProximoEvento.Location = new System.Drawing.Point(15, 40);
-            this.lblProximoEvento.Name = "lblProximoEvento";
-            this.lblProximoEvento.Size = new System.Drawing.Size(185, 25);
-            this.lblProximoEvento.Text = "--:-- Sin programar";
-
+            btnNavCanciones.Dock = DockStyle.Top;
+            btnNavCanciones.FlatAppearance.BorderSize = 0;
+            btnNavCanciones.FlatAppearance.MouseOverBackColor = Color.FromArgb(73, 80, 87);
+            btnNavCanciones.FlatStyle = FlatStyle.Flat;
+            btnNavCanciones.Font = new Font("Segoe UI", 11F);
+            btnNavCanciones.ForeColor = Color.White;
+            btnNavCanciones.Location = new Point(0, 130);
+            btnNavCanciones.Name = "btnNavCanciones";
+            btnNavCanciones.Padding = new Padding(15, 0, 0, 0);
+            btnNavCanciones.Size = new Size(220, 50);
+            btnNavCanciones.TabIndex = 2;
+            btnNavCanciones.Text = "🎵  Audios";
+            btnNavCanciones.TextAlign = ContentAlignment.MiddleLeft;
+            btnNavCanciones.UseVisualStyleBackColor = true;
+            btnNavCanciones.Click += btnNavCanciones_Click;
+            // 
+            // btnNavHorarios
+            // 
+            btnNavHorarios.Dock = DockStyle.Top;
+            btnNavHorarios.FlatAppearance.BorderSize = 0;
+            btnNavHorarios.FlatAppearance.MouseOverBackColor = Color.FromArgb(73, 80, 87);
+            btnNavHorarios.FlatStyle = FlatStyle.Flat;
+            btnNavHorarios.Font = new Font("Segoe UI", 11F);
+            btnNavHorarios.ForeColor = Color.White;
+            btnNavHorarios.Location = new Point(0, 80);
+            btnNavHorarios.Name = "btnNavHorarios";
+            btnNavHorarios.Padding = new Padding(15, 0, 0, 0);
+            btnNavHorarios.Size = new Size(220, 50);
+            btnNavHorarios.TabIndex = 1;
+            btnNavHorarios.Text = "📅  Programación";
+            btnNavHorarios.TextAlign = ContentAlignment.MiddleLeft;
+            btnNavHorarios.UseVisualStyleBackColor = true;
+            btnNavHorarios.Click += btnNavHorarios_Click;
+            // 
+            // pnLogo
+            // 
+            pnLogo.BackColor = Color.FromArgb(13, 110, 253);
+            pnLogo.Controls.Add(lblLogo);
+            pnLogo.Dock = DockStyle.Top;
+            pnLogo.Location = new Point(0, 0);
+            pnLogo.Name = "pnLogo";
+            pnLogo.Size = new Size(220, 80);
+            pnLogo.TabIndex = 0;
+            // 
+            // lblLogo
+            // 
+            lblLogo.AutoSize = true;
+            lblLogo.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            lblLogo.ForeColor = Color.White;
+            lblLogo.Location = new Point(2, 25);
+            lblLogo.Name = "lblLogo";
+            lblLogo.Size = new Size(217, 30);
+            lblLogo.TabIndex = 0;
+            lblLogo.Text = "GESTOR DE TIMBRE";
+            // 
+            // pnTop
+            // 
+            pnTop.BackColor = Color.White;
+            pnTop.Controls.Add(lblTituloApp);
+            pnTop.Dock = DockStyle.Top;
+            pnTop.Location = new Point(220, 0);
+            pnTop.Name = "pnTop";
+            pnTop.Size = new Size(788, 50);
+            pnTop.TabIndex = 1;
+            // 
+            // lblTituloApp
+            // 
+            lblTituloApp.AutoSize = true;
+            lblTituloApp.Font = new Font("Segoe UI", 14F);
+            lblTituloApp.ForeColor = Color.FromArgb(64, 64, 64);
+            lblTituloApp.Location = new Point(20, 12);
+            lblTituloApp.Name = "lblTituloApp";
+            lblTituloApp.Size = new Size(129, 25);
+            lblTituloApp.TabIndex = 0;
+            lblTituloApp.Text = "Panel General";
+            // 
+            // pnConsole
+            // 
+            pnConsole.BackColor = Color.White;
+            pnConsole.Controls.Add(pnControlesAudio);
+            pnConsole.Controls.Add(pnInfoEvento);
+            pnConsole.Dock = DockStyle.Bottom;
+            pnConsole.Location = new Point(220, 531);
+            pnConsole.Name = "pnConsole";
+            pnConsole.Size = new Size(788, 100);
+            pnConsole.TabIndex = 2;
             // 
             // pnControlesAudio
             // 
-            this.pnControlesAudio.Controls.Add(this.btnSaltar);
-            this.pnControlesAudio.Controls.Add(this.btnEmergencyStop);
-            this.pnControlesAudio.Controls.Add(this.pbProgreso);
-            this.pnControlesAudio.Controls.Add(this.lblSonando);
-            this.pnControlesAudio.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnControlesAudio.Location = new System.Drawing.Point(300, 0);
-            this.pnControlesAudio.Name = "pnControlesAudio";
-            this.pnControlesAudio.Size = new System.Drawing.Size(428, 88);
-            this.pnControlesAudio.TabIndex = 1;
-
+            pnControlesAudio.BackColor = Color.WhiteSmoke;
+            pnControlesAudio.BorderStyle = BorderStyle.FixedSingle;
+            pnControlesAudio.Controls.Add(btnRecargar);
+            pnControlesAudio.Controls.Add(btnEmergencyStop);
+            pnControlesAudio.Controls.Add(pbProgreso);
+            pnControlesAudio.Controls.Add(lblSonando);
+            pnControlesAudio.Dock = DockStyle.Fill;
+            pnControlesAudio.Location = new Point(350, 0);
+            pnControlesAudio.Name = "pnControlesAudio";
+            pnControlesAudio.Padding = new Padding(10);
+            pnControlesAudio.Size = new Size(438, 100);
+            pnControlesAudio.TabIndex = 1;
             // 
-            // lblSonando
+            // btnRecargar
             // 
-            this.lblSonando.AutoSize = true;
-            this.lblSonando.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblSonando.Location = new System.Drawing.Point(20, 15);
-            this.lblSonando.Name = "lblSonando";
-            this.lblSonando.Size = new System.Drawing.Size(95, 19);
-            this.lblSonando.Text = "En silencio...";
-
-            // 
-            // pbProgreso
-            // 
-            this.pbProgreso.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbProgreso.Location = new System.Drawing.Point(20, 40);
-            this.pbProgreso.Name = "pbProgreso";
-            this.pbProgreso.Size = new System.Drawing.Size(200, 10);
-            this.pbProgreso.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.pbProgreso.TabIndex = 1;
-
+            btnRecargar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnRecargar.BackColor = Color.SteelBlue;
+            btnRecargar.FlatAppearance.BorderSize = 0;
+            btnRecargar.FlatStyle = FlatStyle.Flat;
+            btnRecargar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnRecargar.ForeColor = Color.White;
+            btnRecargar.Location = new Point(216, 53);
+            btnRecargar.Name = "btnRecargar";
+            btnRecargar.Size = new Size(100, 30);
+            btnRecargar.TabIndex = 3;
+            btnRecargar.Text = "RECARGAR";
+            btnRecargar.UseVisualStyleBackColor = false;
+            btnRecargar.Click += btnRecargar_Click;
             // 
             // btnEmergencyStop
             // 
-            this.btnEmergencyStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEmergencyStop.BackColor = System.Drawing.Color.Firebrick;
-            this.btnEmergencyStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEmergencyStop.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnEmergencyStop.ForeColor = System.Drawing.Color.White;
-            this.btnEmergencyStop.Location = new System.Drawing.Point(320, 20);
-            this.btnEmergencyStop.Name = "btnEmergencyStop";
-            this.btnEmergencyStop.Size = new System.Drawing.Size(90, 40);
-            this.btnEmergencyStop.TabIndex = 2;
-            this.btnEmergencyStop.Text = "SILENCIO";
-            this.btnEmergencyStop.UseVisualStyleBackColor = false;
-            this.btnEmergencyStop.Click += new System.EventHandler(this.btnDetener_Click);
-
+            btnEmergencyStop.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnEmergencyStop.BackColor = Color.FromArgb(220, 53, 69);
+            btnEmergencyStop.FlatAppearance.BorderSize = 0;
+            btnEmergencyStop.FlatStyle = FlatStyle.Flat;
+            btnEmergencyStop.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnEmergencyStop.ForeColor = Color.White;
+            btnEmergencyStop.Location = new Point(322, 53);
+            btnEmergencyStop.Name = "btnEmergencyStop";
+            btnEmergencyStop.Size = new Size(100, 30);
+            btnEmergencyStop.TabIndex = 2;
+            btnEmergencyStop.Text = "SILENCIAR";
+            btnEmergencyStop.UseVisualStyleBackColor = false;
+            btnEmergencyStop.Click += btnDetener_Click;
             // 
-            // btnSaltar
+            // pbProgreso
             // 
-            this.btnSaltar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaltar.BackColor = System.Drawing.Color.White;
-            this.btnSaltar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaltar.Location = new System.Drawing.Point(230, 20);
-            this.btnSaltar.Name = "btnSaltar";
-            this.btnSaltar.Size = new System.Drawing.Size(75, 40);
-            this.btnSaltar.TabIndex = 3;
-            this.btnSaltar.Text = "Saltar >>";
-            this.btnSaltar.UseVisualStyleBackColor = false;
-            this.btnSaltar.Click += new System.EventHandler(this.btnSaltar_Click);
-
+            pbProgreso.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pbProgreso.Location = new Point(13, 37);
+            pbProgreso.Name = "pbProgreso";
+            pbProgreso.Size = new Size(409, 10);
+            pbProgreso.Style = ProgressBarStyle.Continuous;
+            pbProgreso.TabIndex = 1;
+            // 
+            // lblSonando
+            // 
+            lblSonando.AutoSize = true;
+            lblSonando.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblSonando.Location = new Point(10, 10);
+            lblSonando.Name = "lblSonando";
+            lblSonando.Size = new Size(90, 19);
+            lblSonando.TabIndex = 0;
+            lblSonando.Text = "En silencio...";
+            // 
+            // pnInfoEvento
+            // 
+            pnInfoEvento.BackColor = Color.White;
+            pnInfoEvento.BorderStyle = BorderStyle.FixedSingle;
+            pnInfoEvento.Controls.Add(lblProximoEvento);
+            pnInfoEvento.Controls.Add(lblTituloProximo);
+            pnInfoEvento.Dock = DockStyle.Left;
+            pnInfoEvento.Location = new Point(0, 0);
+            pnInfoEvento.Name = "pnInfoEvento";
+            pnInfoEvento.Size = new Size(350, 100);
+            pnInfoEvento.TabIndex = 0;
+            // 
+            // lblProximoEvento
+            // 
+            lblProximoEvento.AutoEllipsis = true;
+            lblProximoEvento.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblProximoEvento.ForeColor = Color.FromArgb(33, 37, 41);
+            lblProximoEvento.Location = new Point(15, 45);
+            lblProximoEvento.Name = "lblProximoEvento";
+            lblProximoEvento.Size = new Size(320, 25);
+            lblProximoEvento.TabIndex = 1;
+            lblProximoEvento.Text = "--:-- Sin programar";
+            // 
+            // lblTituloProximo
+            // 
+            lblTituloProximo.AutoSize = true;
+            lblTituloProximo.Font = new Font("Segoe UI", 9F);
+            lblTituloProximo.ForeColor = Color.DimGray;
+            lblTituloProximo.Location = new Point(15, 20);
+            lblTituloProximo.Name = "lblTituloProximo";
+            lblTituloProximo.Size = new Size(109, 15);
+            lblTituloProximo.TabIndex = 0;
+            lblTituloProximo.Text = "PRÓXIMO EVENTO:";
+            // 
+            // pnStatus
+            // 
+            pnStatus.Controls.Add(statusStrip1);
+            pnStatus.Dock = DockStyle.Bottom;
+            pnStatus.Location = new Point(220, 631);
+            pnStatus.Name = "pnStatus";
+            pnStatus.Size = new Size(788, 30);
+            pnStatus.TabIndex = 3;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.BackColor = Color.White;
+            statusStrip1.Items.AddRange(new ToolStripItem[] { lblEstadoServicio, lblEspacio, lblReloj });
+            statusStrip1.Location = new Point(0, 8);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(788, 22);
+            statusStrip1.TabIndex = 0;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // lblEstadoServicio
+            // 
+            lblEstadoServicio.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblEstadoServicio.Name = "lblEstadoServicio";
+            lblEstadoServicio.Size = new Size(120, 17);
+            lblEstadoServicio.Text = "Sistema Preparado...";
+            // 
+            // lblEspacio
+            // 
+            lblEspacio.Name = "lblEspacio";
+            lblEspacio.Size = new Size(607, 17);
+            lblEspacio.Spring = true;
+            // 
+            // lblReloj
+            // 
+            lblReloj.Name = "lblReloj";
+            lblReloj.Size = new Size(46, 17);
+            lblReloj.Text = " --:--:--";
+            lblReloj.TextAlign = ContentAlignment.MiddleRight;
             // 
             // uiTimer
             // 
-            this.uiTimer.Interval = 1000;
-            this.uiTimer.Tick += new System.EventHandler(this.uiTimer_Tick);
-
+            uiTimer.Interval = 1000;
+            uiTimer.Tick += uiTimer_Tick;
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 530);
-            this.Controls.Add(this.pnConsole);
-            this.Controls.Add(this.pnTop);
-            this.Controls.Add(this.pnSide);
-            this.IsMdiContainer = true;
-            this.Name = "FrmMain";
-            this.Text = "Sistema de Gestión Musical";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.pnSide.ResumeLayout(false);
-            this.pnSide.PerformLayout();
-            this.tsMenu.ResumeLayout(false);
-            this.tsMenu.PerformLayout();
-            this.pnConsole.ResumeLayout(false);
-            this.pnControlesAudio.ResumeLayout(false);
-            this.pnControlesAudio.PerformLayout();
-            this.pnInfoEvento.ResumeLayout(false);
-            this.pnInfoEvento.PerformLayout();
-            this.pnTop.ResumeLayout(false);
-            this.pnTop.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1008, 661);
+            Controls.Add(pnConsole);
+            Controls.Add(pnStatus);
+            Controls.Add(pnTop);
+            Controls.Add(pnSide);
+            IsMdiContainer = true;
+            MinimumSize = new Size(1024, 700);
+            Name = "FrmMain";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Sistema de Gestión Musical";
+            WindowState = FormWindowState.Maximized;
+            pnSide.ResumeLayout(false);
+            pnLogo.ResumeLayout(false);
+            pnLogo.PerformLayout();
+            pnTop.ResumeLayout(false);
+            pnTop.PerformLayout();
+            pnConsole.ResumeLayout(false);
+            pnControlesAudio.ResumeLayout(false);
+            pnControlesAudio.PerformLayout();
+            pnInfoEvento.ResumeLayout(false);
+            pnInfoEvento.PerformLayout();
+            pnStatus.ResumeLayout(false);
+            pnStatus.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            ResumeLayout(false);
         }
 
-        private System.Windows.Forms.Panel pnTop;
         private System.Windows.Forms.Panel pnSide;
-        private System.Windows.Forms.ToolStrip tsMenu;
-        private System.Windows.Forms.ToolStripButton btnNavHorarios;
-        private System.Windows.Forms.ToolStripButton btnNavCanciones;
-        private System.Windows.Forms.ToolStripButton btnNavListas;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnIniciar;
-        private System.Windows.Forms.ToolStripButton btnDetener;
-        private System.Windows.Forms.Panel pnConsole;
-        private System.Windows.Forms.Panel pnControlesAudio;
-        private System.Windows.Forms.Button btnEmergencyStop;
-        private System.Windows.Forms.ProgressBar pbProgreso;
-        private System.Windows.Forms.Label lblSonando;
-        private System.Windows.Forms.Panel pnInfoEvento;
-        private System.Windows.Forms.Label lblProximoEvento;
-        private System.Windows.Forms.Label lblTituloProximo;
-        private System.Windows.Forms.Button btnSaltar;
+        private System.Windows.Forms.Panel pnLogo;
+        private System.Windows.Forms.Label lblLogo;
+        private System.Windows.Forms.Button btnNavHorarios;
+        private System.Windows.Forms.Button btnNavListas;
+        private System.Windows.Forms.Button btnNavCanciones;
+        private System.Windows.Forms.Panel pnTop;
         private System.Windows.Forms.Label lblTituloApp;
+        private System.Windows.Forms.Panel pnConsole;
+        private System.Windows.Forms.Panel pnStatus;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblEstadoServicio;
+        private System.Windows.Forms.ToolStripStatusLabel lblReloj;
+        private System.Windows.Forms.Panel pnInfoEvento;
+        private System.Windows.Forms.Panel pnControlesAudio;
+        private System.Windows.Forms.Label lblTituloProximo;
+        private System.Windows.Forms.Label lblProximoEvento;
+        private System.Windows.Forms.Label lblSonando;
+        private System.Windows.Forms.ProgressBar pbProgreso;
+        private System.Windows.Forms.Button btnEmergencyStop;
+        private System.Windows.Forms.Button btnRecargar;
         private System.Windows.Forms.Timer uiTimer;
+        private System.Windows.Forms.Label labelSeparador;
+        private System.Windows.Forms.Button btnDetener;
+        private System.Windows.Forms.Button btnIniciar;
+        private System.Windows.Forms.ToolStripStatusLabel lblEspacio;
     }
 }

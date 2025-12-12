@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using P1_GestionListaMusical.Datos;
 using P1_GestionListaMusical.Modelos;
 using System.IO;
+using NAudio.Wave;
 
 namespace P1_GestionListaMusical.Formularios
 {
@@ -43,9 +44,22 @@ namespace P1_GestionListaMusical.Formularios
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     txtRuta.Text = ofd.FileName;
+
                     if (string.IsNullOrEmpty(txtTitulo.Text))
                     {
                         txtTitulo.Text = Path.GetFileNameWithoutExtension(ofd.FileName);
+                    }
+
+                    try
+                    {
+                        using (var reader = new AudioFileReader(ofd.FileName))
+                        {
+                            _cancion.DuracionSegundos = (int)reader.TotalTime.TotalSeconds;
+                        }
+                    }
+                    catch
+                    {
+                        _cancion.DuracionSegundos = 0;
                     }
                 }
             }
@@ -62,14 +76,20 @@ namespace P1_GestionListaMusical.Formularios
             _cancion.Titulo = txtTitulo.Text;
             _cancion.Artista = txtArtista.Text;
             _cancion.RutaArchivo = txtRuta.Text;
-            _cancion.DuracionSegundos = 0;
 
-            if (_cancion.CancionID == 0)
-                _repository.Insertar(_cancion);
-            else
-                _repository.Actualizar(_cancion);
+            try
+            {
+                if (_cancion.CancionID == 0)
+                    _repository.Insertar(_cancion);
+                else
+                    _repository.Actualizar(_cancion);
 
-            DialogResult = DialogResult.OK;
+                DialogResult = DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar: " + ex.Message);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

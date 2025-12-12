@@ -36,6 +36,7 @@
             numDiaMes = new NumericUpDown();
             btnGuardar = new Button();
             btnCancelar = new Button();
+            chkActivo = new CheckBox();
             grpSemanal.SuspendLayout();
             grpMensual.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numDiaMes).BeginInit();
@@ -251,11 +252,25 @@
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
             // 
+            // chkActivo
+            // 
+            chkActivo.AutoSize = true;
+            chkActivo.Checked = true;
+            chkActivo.CheckState = CheckState.Checked;
+            chkActivo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            chkActivo.Location = new Point(275, 15);
+            chkActivo.Name = "chkActivo";
+            chkActivo.Size = new Size(86, 19);
+            chkActivo.TabIndex = 12;
+            chkActivo.Text = "Habilitado";
+            chkActivo.UseVisualStyleBackColor = true;
+            // 
             // FrmHorario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(390, 360);
+            Controls.Add(chkActivo);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
             Controls.Add(grpMensual);
@@ -304,5 +319,6 @@
         private System.Windows.Forms.NumericUpDown numDiaMes;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.CheckBox chkActivo;
     }
 }

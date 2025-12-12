@@ -47,7 +47,9 @@ namespace P1_GestionListaMusical.Formularios
         private void CargarDatos()
         {
             txtNombre.Text = _horario.Nombre;
+            chkActivo.Checked = _horario.EstaActivo;
             dtpHora.Value = _horario.InicioRegla;
+
             if (_horario.ListaID > 0) cboListas.SelectedValue = _horario.ListaID;
 
             InterpretarRegla(_horario.ReglaRRule);
@@ -107,6 +109,7 @@ namespace P1_GestionListaMusical.Formularios
             }
 
             _horario.Nombre = txtNombre.Text;
+            _horario.EstaActivo = chkActivo.Checked;
             _horario.ListaID = (int)cboListas.SelectedValue;
 
             var now = DateTime.Now;

@@ -2,15 +2,8 @@
 {
     partial class FrmLista
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,12 +13,6 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             pnTop = new Panel();
@@ -40,13 +27,13 @@
             btnCancelar = new Button();
             pnCenter = new Panel();
             tlpCuerpo = new TableLayoutPanel();
+            lblDisp = new Label();
+            lblAsign = new Label();
             dgvDisponibles = new DataGridView();
             pnBotones = new Panel();
             btnQuitar = new Button();
             btnAgregar = new Button();
             dgvAsignadas = new DataGridView();
-            lblAsign = new Label();
-            lblDisp = new Label();
             pnTop.SuspendLayout();
             pnBottom.SuspendLayout();
             pnCenter.SuspendLayout();
@@ -94,7 +81,7 @@
             txtDescripcion.Location = new Point(360, 20);
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(400, 63);
+            txtDescripcion.Size = new Size(527, 63);
             txtDescripcion.TabIndex = 3;
             // 
             // label2
@@ -157,8 +144,6 @@
             // pnCenter
             // 
             pnCenter.Controls.Add(tlpCuerpo);
-            pnCenter.Controls.Add(lblAsign);
-            pnCenter.Controls.Add(lblDisp);
             pnCenter.Dock = DockStyle.Fill;
             pnCenter.Location = new Point(0, 100);
             pnCenter.Name = "pnCenter";
@@ -172,16 +157,43 @@
             tlpCuerpo.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpCuerpo.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60F));
             tlpCuerpo.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tlpCuerpo.Controls.Add(dgvDisponibles, 0, 0);
-            tlpCuerpo.Controls.Add(pnBotones, 1, 0);
-            tlpCuerpo.Controls.Add(dgvAsignadas, 2, 0);
+            tlpCuerpo.Controls.Add(lblDisp, 0, 0);
+            tlpCuerpo.Controls.Add(lblAsign, 2, 0);
+            tlpCuerpo.Controls.Add(dgvDisponibles, 0, 1);
+            tlpCuerpo.Controls.Add(pnBotones, 1, 1);
+            tlpCuerpo.Controls.Add(dgvAsignadas, 2, 1);
             tlpCuerpo.Dock = DockStyle.Fill;
-            tlpCuerpo.Location = new Point(204, 10);
+            tlpCuerpo.Location = new Point(10, 10);
             tlpCuerpo.Name = "tlpCuerpo";
-            tlpCuerpo.RowCount = 1;
+            tlpCuerpo.RowCount = 2;
+            tlpCuerpo.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
             tlpCuerpo.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlpCuerpo.Size = new Size(565, 391);
+            tlpCuerpo.Size = new Size(880, 391);
             tlpCuerpo.TabIndex = 2;
+            // 
+            // lblDisp
+            // 
+            lblDisp.AutoSize = true;
+            lblDisp.Dock = DockStyle.Fill;
+            lblDisp.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblDisp.Location = new Point(3, 0);
+            lblDisp.Name = "lblDisp";
+            lblDisp.Size = new Size(404, 25);
+            lblDisp.TabIndex = 0;
+            lblDisp.Text = "Canciones Disponibles (Biblioteca)";
+            lblDisp.TextAlign = ContentAlignment.BottomLeft;
+            // 
+            // lblAsign
+            // 
+            lblAsign.AutoSize = true;
+            lblAsign.Dock = DockStyle.Fill;
+            lblAsign.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblAsign.Location = new Point(473, 0);
+            lblAsign.Name = "lblAsign";
+            lblAsign.Size = new Size(404, 25);
+            lblAsign.TabIndex = 1;
+            lblAsign.Text = "Contenido de la Lista";
+            lblAsign.TextAlign = ContentAlignment.BottomLeft;
             // 
             // dgvDisponibles
             // 
@@ -190,11 +202,11 @@
             dgvDisponibles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvDisponibles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDisponibles.Dock = DockStyle.Fill;
-            dgvDisponibles.Location = new Point(3, 3);
+            dgvDisponibles.Location = new Point(3, 28);
             dgvDisponibles.Name = "dgvDisponibles";
             dgvDisponibles.ReadOnly = true;
             dgvDisponibles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDisponibles.Size = new Size(246, 385);
+            dgvDisponibles.Size = new Size(404, 360);
             dgvDisponibles.TabIndex = 0;
             // 
             // pnBotones
@@ -202,16 +214,16 @@
             pnBotones.Controls.Add(btnQuitar);
             pnBotones.Controls.Add(btnAgregar);
             pnBotones.Dock = DockStyle.Fill;
-            pnBotones.Location = new Point(255, 3);
+            pnBotones.Location = new Point(413, 28);
             pnBotones.Name = "pnBotones";
-            pnBotones.Size = new Size(54, 385);
+            pnBotones.Size = new Size(54, 360);
             pnBotones.TabIndex = 1;
             // 
             // btnQuitar
             // 
             btnQuitar.Anchor = AnchorStyles.None;
             btnQuitar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnQuitar.Location = new Point(7, 202);
+            btnQuitar.Location = new Point(7, 190);
             btnQuitar.Name = "btnQuitar";
             btnQuitar.Size = new Size(40, 40);
             btnQuitar.TabIndex = 1;
@@ -223,7 +235,7 @@
             // 
             btnAgregar.Anchor = AnchorStyles.None;
             btnAgregar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnAgregar.Location = new Point(7, 142);
+            btnAgregar.Location = new Point(7, 130);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(40, 40);
             btnAgregar.TabIndex = 0;
@@ -238,36 +250,12 @@
             dgvAsignadas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvAsignadas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAsignadas.Dock = DockStyle.Fill;
-            dgvAsignadas.Location = new Point(315, 3);
+            dgvAsignadas.Location = new Point(473, 28);
             dgvAsignadas.Name = "dgvAsignadas";
             dgvAsignadas.ReadOnly = true;
             dgvAsignadas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvAsignadas.Size = new Size(247, 385);
+            dgvAsignadas.Size = new Size(404, 360);
             dgvAsignadas.TabIndex = 2;
-            // 
-            // lblAsign
-            // 
-            lblAsign.AutoSize = true;
-            lblAsign.Dock = DockStyle.Right;
-            lblAsign.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblAsign.Location = new Point(769, 10);
-            lblAsign.Name = "lblAsign";
-            lblAsign.Padding = new Padding(0, 0, 0, 10);
-            lblAsign.Size = new Size(121, 25);
-            lblAsign.TabIndex = 1;
-            lblAsign.Text = "Contenido de la Lista";
-            // 
-            // lblDisp
-            // 
-            lblDisp.AutoSize = true;
-            lblDisp.Dock = DockStyle.Left;
-            lblDisp.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblDisp.Location = new Point(10, 10);
-            lblDisp.Name = "lblDisp";
-            lblDisp.Padding = new Padding(0, 0, 0, 10);
-            lblDisp.Size = new Size(194, 25);
-            lblDisp.TabIndex = 0;
-            lblDisp.Text = "Canciones Disponibles (Biblioteca)";
             // 
             // FrmLista
             // 
@@ -285,15 +273,13 @@
             pnTop.PerformLayout();
             pnBottom.ResumeLayout(false);
             pnCenter.ResumeLayout(false);
-            pnCenter.PerformLayout();
             tlpCuerpo.ResumeLayout(false);
+            tlpCuerpo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDisponibles).EndInit();
             pnBotones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvAsignadas).EndInit();
             ResumeLayout(false);
         }
-
-        #endregion
 
         private System.Windows.Forms.Panel pnTop;
         private System.Windows.Forms.TextBox txtDescripcion;
